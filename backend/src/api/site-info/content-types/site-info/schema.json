@@ -1,0 +1,20 @@
+{
+  "kind": "singleType",
+  "collectionName": "site_infos",
+  "info": {
+    "singularName": "site-info",
+    "pluralName": "site-infos",
+    "displayName": "站点信息"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "unique": true,
+      "required": true
+    }
+  }
+}
