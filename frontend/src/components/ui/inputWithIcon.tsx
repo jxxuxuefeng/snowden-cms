@@ -9,7 +9,6 @@ export interface InputProps
 const InputWithIcon = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, ...props }, ref) => {
     const [inputType, setInputType] = useState(type);
-    console.log(className, "classname");
 
     return (
       <div className="relative w-full">
