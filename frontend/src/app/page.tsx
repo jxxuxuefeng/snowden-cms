@@ -15,6 +15,7 @@ import {
 import Image from "next/image";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { InputWithIcon } from "@/components/ui/inputWithIcon";
 
 const FormSchema = z.object({
   username: z.string().min(1, {
@@ -80,7 +81,7 @@ export default function Home() {
                         密码<span className="text-red-700 text-sm">*</span>
                       </FormLabel>
                       <FormControl>
-                        <Input
+                        <InputWithIcon
                           placeholder="请输入密码"
                           type="password"
                           {...field}
