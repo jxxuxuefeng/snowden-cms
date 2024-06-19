@@ -95,7 +95,7 @@ export default function Home() {
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-2">
                 <Checkbox id="terms" />
-                <label htmlFor="terms" className="cursor-pointer">
+                <label htmlFor="terms" className="cursor-pointer text-sm">
                   自动登录
                 </label>
               </div>
