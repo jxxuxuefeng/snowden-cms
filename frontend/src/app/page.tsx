@@ -16,6 +16,10 @@ import Image from "next/image";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { InputWithIcon } from "@/components/ui/inputWithIcon";
+import { request } from "@/lib/request";
+import { useGlobalStore } from "@/store/global.store";
+import { toast } from "@/components/ui/use-toast";
+import { local } from "roodash";
 
 const FormSchema = z.object({
   username: z.string().min(1, {
@@ -35,8 +39,36 @@ export default function Home() {
     },
   });
 
-  const onSubmit = () => {
-    console.log(form.getValues(), "form");
+  const setToken = useGlobalStore((state) => state.setToken);
+  const setUserInfo = useGlobalStore((state) => state.setUserInfo);
+  const token = useGlobalStore((state) => state.token);
+  console.log(token, "token");
+
+  const onSubmit = async () => {
+    const username = form.getValues("username");
+    const password = form.getValues("password");
+    try {
+      const res = await request.post<null, { jwt: string; user: any }>(
+        "/auth/local",
+        {
+          identifier: username,
+          password: password,
+        },
+      );
+
+      toast({
+        description: "登录成功",
+        duration: 2000,
+      });
+
+      local.set("token", res.jwt);
+      // localStorage.setItem("token", res.jwt);
+      setToken(res.jwt);
+      setUserInfo(res.user);
+    } catch (error) {
+      console.log(error);
+    } finally {
+    }
   };
 
   return (
